@@ -23,7 +23,7 @@
 |---|---|---|---|
 | order-control | `/home/konan/order-control` | github.com/kgt-hub/order-control | v0.1-prototype（本番稼働中・未公開） |
 | titan | `/home/konan/titan` | github.com/kgt-hub/titan | v0.1-prototype（開発中・未公開） |
-| kdb | `/home/konan/kdb` | — | 要件定義中（mbox 抽出中） |
+| kdb | `/home/konan/kdb` | — | mbox 抽出完了・設計中 |
 
 ---
 
@@ -148,6 +148,16 @@ kdb が整わないと全フロー検証ができない。
 ### 目的
 過去〜現在のメールを資産として活用し、業務の自動化・意思決定支援を行う。
 
+### データ規模（2026-04-10 確定）
+| 項目 | 数値 |
+|---|---|
+| メール件数 | 19,474 件 |
+| DB サイズ | 375 MB（SQLite: `/mnt/d/kgt-mail-data/mail.db`） |
+| 添付ファイル数 | 13,780 件 |
+| 添付合計サイズ | 9.02 GB（`/mnt/d/kgt-mail-data/attachments`） |
+| 添付あり件数 | 8,433 件 |
+| 対象期間 | 3年分 |
+
 ### メール取込み方針
 - **ソース**: Gmail Business Starter（共有受信箱）
 - **取込み方法**: Gmail API（本文はサーバー内で処理・外部送信なし）
@@ -256,3 +266,4 @@ PO メール     → kdb → order-control に「確認待ち」仮登録
 | 2026-04-10 | スタッフ公開障壁2追記・LM Studio 構成方針追記 |
 | 2026-04-10 | 運用テストの原則追記（全フロー・全ロール一斉が必須） |
 | 2026-04-10 | 業務フロー全体像を確定（kdb が入口・全体のボトルネック） |
+| 2026-04-10 | kdb mbox 抽出完了（19,474件・375MB・添付9.02GB） |
