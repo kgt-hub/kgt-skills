@@ -197,10 +197,24 @@ kdb が整わないと全フロー検証ができない。
 → 得意先から実際の 3D データが届いている = titan の知識DBと連携価値あり
 
 ### メール取込み方針
-- **ソース**: Gmail Business Starter（共有受信箱）
-- **取込み方法**: Gmail API（本文はサーバー内で処理・外部送信なし）
+- **ソース**: Gmail Business Starter（共有受信箱: m_iwasaki@thai-konan.com）
+- **取込み方法**: Gmail API（本文はサーバー内で処理・外部送信なし・既読変更なし）
 - **対象**: 全受信メール（常時取込み）
 - **言語**: タイ語・英語・日本語 混在
+- **頻度**: 15分ポーリング予定（**cron 設定は未実施・後で対応**）
+
+### 実装済み（2026-04-10）
+- `gmail_auth.py`: OAuth2 認証・token.json 管理
+- `gmail_sync.py`: 増分取込み（`--days=N` で日数指定可、通常は前回以降を自動取得）
+- `classify.py`: メール分類ルーチン v2（方向性判定 + LM 詳細分類）
+- `emails_dedup` ビュー: mbox と gmail_api の重複除去（gmail_api 優先）
+
+### DB 現状（2026-04-10）
+| sync_source | 件数 |
+|---|---|
+| mbox（3年分） | 36,966件 |
+| gmail_api（直近7日） | 424件 |
+| emails_dedup（重複除去後） | 37,219件 |
 
 ### 分類・処理フロー
 ```
